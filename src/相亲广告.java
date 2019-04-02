@@ -13,15 +13,18 @@ public class 相亲广告 {
    */
   public static void main(String[] args) {
     long l = 7140229933L;
-    long start1 = System.currentTimeMillis();
-    getFactors1(l);
-    long end1 = System.currentTimeMillis();
-    System.out.println("getFactors1耗时：" + (end1 - start1) + " ms");
-
     long start2 = System.currentTimeMillis();
     getFactors2(l);
     long end2 = System.currentTimeMillis();
-    System.out.println("getFactors2耗时：" + (end2 - start2) + " ms");
+    System.out.println("解法2耗时：" + (end2 - start2) + " ms");
+
+    long start1 = System.currentTimeMillis();
+    // 加上for循环就是第二题的题解，有128组解
+    for (l = 6541367000L; l <= 6541367999L; l++) {
+      getFactors1(l);
+    }
+    long end1 = System.currentTimeMillis();
+    System.out.println("解法1耗时：" + (end1 - start1) + " ms");
   }
 
   /**
@@ -33,7 +36,7 @@ public class 相亲广告 {
       if (isPrime(i)) {
         long j = l / i;
         if (i * j == l && isPrime(j)) {
-          System.out.println("小因数=" + i + ",大因数=" + j);// i = 83777,j = 85229
+          System.out.println("小因数=" + i + ", 大因数=" + j + ", 乘积" + l);// i = 83777,j = 85229
           break;
         }
       }
@@ -53,7 +56,7 @@ public class 相亲广告 {
   }
 
   /**
-   * 题目一 解法二
+   * 题目一 解法二（不支持题目二的求解）
    * 理论基础：(a+b)*(a-b)=a^2-b^2
    * 基本思路：给l累加，直到加到它成为一个整数的平方并且和l原来的值之差也是一个整数的平方，然后利用上面公式计算出结果
    * 不足之处：如果传入的l两个因数奇偶性不相同，则该方法无解，但在此处适用
